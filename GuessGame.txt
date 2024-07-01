@@ -1,0 +1,62 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class GuessGame {
+    public static void main(String[] args) {
+        String num = randomNumber();
+        char[] randomchar = num.toCharArray();
+        int correctCount = 0;
+        int numberinPlace = 0;
+        for (int j = 2; j >= 0; j--) {
+            String userNum = userGuess();
+            char[] userNumChar = userNum.toCharArray();
+
+            for (int i = 0; i < 3; i++) {
+                if (userNumChar[i] == randomchar[i]) {
+                    correctCount++;
+                    numberinPlace++;
+                }
+
+            }
+            System.out.println(correctCount + " number is correct and " + numberinPlace + " number in place ");
+            if (correctCount == 3) {
+                System.out.println("Congratulations!! You are Correct");
+                break;
+            }
+            correctCount = 0;
+            numberinPlace = 0;
+
+            System.out.println("You have " + j + " attempts left!");
+        }
+        if (correctCount != 3) {
+            System.out.println("Dun Give up!!Wanna Try Again?");
+        }
+
+    }
+
+    public static String userGuess() {
+        String num;
+        String checkeduserguess = null;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please Guess A Number between 000 and 999, Remember You can attempt only 3 times!!");
+        num = scan.nextLine();
+        if (num.length() == 3) {
+            checkeduserguess = num;
+        } else {
+            System.out.println("Please Enter A Number between 000 and 999");
+        }
+        return checkeduserguess;
+
+    }
+
+    public static String randomNumber() {
+        Random r1 = new Random();
+        Random r2 = new Random();
+        Random r3 = new Random();
+
+        String num = r1.nextInt(10) + "" + r2.nextInt(10) + "" + r3.nextInt(10);
+
+        return num;
+    }
+
+}
